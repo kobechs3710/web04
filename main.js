@@ -6,12 +6,16 @@ window.onload = function(){
     var start = document.getElementById("start");
     var stop = document.getElementById("stop");
     var reset = document.getElementById("reset");
+    var now = null
+    var max = 710;
+    var input_area = document.getElementById("text_area");
+    var output_area = document.getElementById("text_length");
 
     start.onclick = function(){
         toggle();
         counter = setInterval(count,1000);
     }
-
+    
     stop.onclick = function(){
         toggle();
         clearInterval(counter);
@@ -23,7 +27,7 @@ window.onload = function(){
         min.innerHTML = Math.floor(time / 60);
     }
 
-    function.toggle(){
+    function toggle(){
         if(start.disabled){
             start.disabled = false;
             stop.disabled = true;
@@ -34,10 +38,11 @@ window.onload = function(){
     }
 
     function count(){
-        if(time === 0){
+        if(time ===0){
             sec.innerHTML = 0;
             min.innerHTML = 0;
-            alert("３分経過しました。");
+            toggle();
+            alert("3分経過しました。");
             clearInterval(counter);
         }else{
             time -= 1;
@@ -46,15 +51,8 @@ window.onload = function(){
         }
     }
 
-
-    var now = null,max = 100;
-    var input_area = document.getElementById("text_area");
-    var output_area = document.getElementById("text_length");
-
     input_area.onkeyup = function(){
-        now = (max - input_area.Value.length);
+        now = (max - input_area.value.length);
         output_area.innerText = now;
         output_area.className = (now < 0) ? "out" : "";
     }
-
-}
